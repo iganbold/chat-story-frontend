@@ -89,9 +89,8 @@ pages: # Must be named pages to deploy gitlab page
   script:
     - cd ./web && npm run build
     - cp build/index.html build/404.html
-    - mv public _public
     - mv build ../public
-    - echo "Published to https://${PRODUCTION_STAGE_NAME}"
+    - echo "Will be deployed to https://${PRODUCTION_STAGE_NAME}"
   when: manual
   artifacts:
     paths:
