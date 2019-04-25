@@ -1,0 +1,103 @@
+image: node:alpine
+
+variables:
+  REVIEW_STAGE_NAME: $CI_COMMIT_SHORT_SHA-$CI_BUILD_REF_SLUG-chat-story-frontend-review.$APPS_DOMAIN
+  STAGING_STAGE_NAME: $CI_BUILD_REF_SLUG-chat-story-frontend-staging.$APPS_DOMAIN
+  PRODUCTION_STAGE_NAME: projectshowcase.gitlab.io/chat-story-app/chat-story-frontend
+
+cache:
+  paths:
+    - web/node_modules/
+    - web/build/
+
+stages:
+  - build
+  - test
+  - deploy
+  - cleanup
+
+install_dependencies: 
+  stage: build
+  script:
+    - cd ./web && npm install
+  artifacts:
+    paths:
+      - web/node_modules/
+  tags:
+    - docker # The docker tag ensures that this job is picked by the shared Runners on GitLab.com
+
+smoke_test:
+  stage: test
+  script:
+    - cd ./web && npm run test:ci
+  tags:
+    - docker
+
+review:
+  stage: deploy
+  environment:
+    name: review/$CI_BUILD_REF_NAME
+    url: http://$REVIEW_STAGE_NAME
+  script:
+    - cd ./web && npm run build
+    # Note that in order to support routers that use HTML5 pushState API, 
+    # we need to rename the index.html in build folder to 200.
+    # html before deploying to Surge.
+    - mv build/index.html build/200.html 
+    - ./node_modules/.bin/surge -p build/ --domain $REVIEW_STAGE_NAME
+  only:
+    - branches
+  except:
+    - master
+
+stop_review:
+  stage: cleanup
+  environment:
+    name: review/$CI_BUILD_REF_NAME
+    action: stop
+  variables:
+    GIT_STRATEGY: none # GIT_STRATEGY is set up to none since we don't need to checkout the repository for this job
+  script:
+    - ./web/node_modules/.bin/surge teardown $REVIEW_STAGE_NAME
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+
+deploy_staging:
+  stage: deploy
+  environment: 
+    name: staging
+    url: http://$STAGING_STAGE_NAME
+  script:
+    - cd ./web && npm run build
+    - mv build/index.html build/200.html 
+    - ./node_modules/.bin/surge -p build/ --domain $STAGING_STAGE_NAME
+  only:
+    - master
+  tags:
+    - docker # The docker tag ensures that this job is picked by the shared Runners on GitLab.com
+
+pages: # Must be named pages to deploy gitlab page
+  stage: deploy
+  environment: 
+    name: production
+    url: https://$PRODUCTION_STAGE_NAME
+  variables:
+    PUBLIC_URL: /blockexplorer # use this variable to force assets to be referenced verbatim to the url you provide (hostname included).
+  script:
+    - cd ./web && npm run build
+    - cp build/index.html build/404.html
+    - mv public _public
+    - mv build ../public
+    - echo "Published to https://${PRODUCTION_STAGE_NAME}"
+  when: manual
+  artifacts:
+    paths:
+    - public # GitLab uses public folder to deploy GitLab pages after pipeline finished
+    expire_in: 1h # The artifacts are made to expire in an hour since they are deployed to the GitLab Pages server.
+  only:
+    - master
+  tags:
+    - docker # The docker tag ensures that this job is picked by the shared Runners on GitLab.com
