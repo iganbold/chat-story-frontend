@@ -85,7 +85,7 @@ pages: # Must be named pages to deploy gitlab page
     name: production
     url: https://$PRODUCTION_STAGE_NAME
   variables:
-    PUBLIC_URL: /blockexplorer # use this variable to force assets to be referenced verbatim to the url you provide (hostname included).
+    PUBLIC_URL: /chat-story-app/chat-story-frontend # use this variable to force assets to be referenced verbatim to the url you provide (hostname included).
   script:
     - cd ./web && npm run build
     - cp build/index.html build/404.html
