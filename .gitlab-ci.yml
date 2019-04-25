@@ -29,7 +29,7 @@ install_dependencies:
 smoke_test:
   stage: test
   script:
-    - cd ./web && npm run test:nowatch
+    - cd ./web && npm run test:ci
   tags:
     - docker
 
