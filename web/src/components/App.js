@@ -1,8 +1,21 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
+import EpisodePage from "./episode-page";
 import "./App.css";
 
 function App() {
-  return <div>Hello Chat App</div>;
+  return (
+    <React.Fragment>
+      <Switch>
+        {/* TODO: need to add home page for path="/" */}
+        <Route exact path="/" component={EpisodePage} />
+        <Route
+          path="/stories/:storyID/episodes/:episodeID"
+          component={EpisodePage}
+        />
+      </Switch>
+    </React.Fragment>
+  );
 }
 
 export default App;
