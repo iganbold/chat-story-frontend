@@ -82,6 +82,9 @@ const story = {
     }
   ]
 };
+
 module.exports = {
-  story: story
+  story: story,
+  episode: story.episodes[0],
+  actors: story.actors
 };
