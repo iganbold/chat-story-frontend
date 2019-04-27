@@ -1,14 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./components/App";
 import { BrowserRouter as Router } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
+import { Grommet } from "grommet";
+
+const theme = {
+  colors: {
+    brand: "#228BE6"
+  },
+  global: {
+    font: {
+      family: "Roboto",
+      size: "14px",
+      height: "20px"
+    }
+  }
+};
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <Grommet theme={theme} full>
+    <Router>
+      <App />
+    </Router>
+  </Grommet>,
   document.getElementById("root")
 );
 
