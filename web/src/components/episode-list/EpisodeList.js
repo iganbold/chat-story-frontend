@@ -9,6 +9,7 @@ const EpisodeList = ({ dialogs, style, onNextDialog }) => {
       direction="column"
       overflow="auto"
       onClick={onNextDialog}
+      background="white"
       pad={{
         top: "10px"
       }}
