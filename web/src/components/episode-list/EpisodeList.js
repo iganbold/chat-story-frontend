@@ -1,23 +1,18 @@
 import React from "react";
-import styled from "styled-components";
 import EpisodeItem from "../episode-item";
+import { Box } from "grommet";
 
-const List = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const EpisodeList = props => {
+const EpisodeList = ({ dialogs, style, addNextDialog }) => {
   return (
-    <List>
-      {props.episode.dialogs.map((dialog, index) => (
+    <Box height="100%" direction="column" onClick={addNextDialog}>
+      {dialogs.map((dialog, index) => (
         <EpisodeItem
           key={index}
           dialog={dialog}
-          style={props.episode.style[dialog.actorID]}
+          style={style[dialog.actorID]}
         />
       ))}
-    </List>
+    </Box>
   );
 };
 
