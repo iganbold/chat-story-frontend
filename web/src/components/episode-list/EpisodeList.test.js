@@ -5,6 +5,13 @@ import { episode } from "../../../tools/mockData";
 
 it("EpisodeList renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<EpisodeList episode={episode} />, div);
+  ReactDOM.render(
+    <EpisodeList
+      dialogs={episode.dialogs}
+      style={episode.style}
+      onNextDialog={jest.fn()}
+    />,
+    div
+  );
   ReactDOM.unmountComponentAtNode(div);
 });
