@@ -1,6 +1,13 @@
 import React from "react";
 import EpisodeItem from "../episode-item";
+import styled from "styled-components";
 import { Box } from "grommet";
+
+const Space = styled.div`
+  width: 100%;
+  min-height: 200px;
+  background: blue;
+`;
 
 const EpisodeList = ({ dialogs, style, onNextDialog }) => {
   return (
@@ -21,6 +28,7 @@ const EpisodeList = ({ dialogs, style, onNextDialog }) => {
           style={style[dialog.actorID]}
         />
       ))}
+      <Space />
     </Box>
   );
 };
