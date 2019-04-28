@@ -7,6 +7,7 @@ const EpisodeList = ({ dialogs, style, onNextDialog }) => {
     <Box
       flex
       direction="column"
+      overflow="auto"
       onClick={onNextDialog}
       pad={{
         top: "10px"
