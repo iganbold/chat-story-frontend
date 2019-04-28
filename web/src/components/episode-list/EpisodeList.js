@@ -6,12 +6,25 @@ import { Box } from "grommet";
 const Space = styled.div`
   width: 100%;
   min-height: 200px;
-  background: blue;
 `;
 
 class EpisodeList extends React.Component {
-  handleOnClick = scrollTo => {
+  bottomDummyDiv = React.createRef();
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  handleOnClick = () => {
     this.props.onNextDialog();
+  };
+
+  scrollToBottom = () => {
+    this.bottomDummyDiv.current.scrollIntoView({ behavior: "smooth" });
   };
 
   render() {
@@ -34,7 +47,7 @@ class EpisodeList extends React.Component {
             style={style[dialog.actorID]}
           />
         ))}
-        <Space />
+        <Space ref={this.bottomDummyDiv} />
       </Box>
     );
   }
