@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import EpisodePage from "./episode-page";
-import "./App.css";
 
 function App() {
   return (
