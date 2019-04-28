@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import { BrowserRouter as Router } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import { Grommet } from "grommet";
 
@@ -20,9 +19,7 @@ const theme = {
 
 ReactDOM.render(
   <Grommet theme={theme} full>
-    <Router>
-      <App />
-    </Router>
+    <App />
   </Grommet>,
   document.getElementById("root")
 );
