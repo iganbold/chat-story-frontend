@@ -1,10 +1,10 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import EpisodePage from "./episode-page";
 
 function App() {
   return (
-    <React.Fragment>
+    <Router>
       <Switch>
         {/* TODO: need to add home page for path="/" */}
         <Route exact path="/" component={EpisodePage} />
@@ -13,7 +13,7 @@ function App() {
           component={EpisodePage}
         />
       </Switch>
-    </React.Fragment>
+    </Router>
   );
 }
 
