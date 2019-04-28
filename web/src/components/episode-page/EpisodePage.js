@@ -206,7 +206,7 @@ class EpisodePage extends Component {
     return (
       <ResponsiveContext.Consumer>
         {size => (
-          <Keyboard target="document" onSpace={this.handleNextDialog}>
+          <Keyboard target="document" onEnter={this.handleNextDialog}>
             <Box fill>
               <EpisodeBar>
                 <Heading level="3" margin="none">
