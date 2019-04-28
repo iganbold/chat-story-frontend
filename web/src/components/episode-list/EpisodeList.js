@@ -2,9 +2,16 @@ import React from "react";
 import EpisodeItem from "../episode-item";
 import { Box } from "grommet";
 
-const EpisodeList = ({ dialogs, style, addNextDialog }) => {
+const EpisodeList = ({ dialogs, style, onNextDialog }) => {
   return (
-    <Box height="100%" direction="column" onClick={addNextDialog}>
+    <Box
+      flex
+      direction="column"
+      onClick={onNextDialog}
+      pad={{
+        top: "10px"
+      }}
+    >
       {dialogs.map((dialog, index) => (
         <EpisodeItem
           key={index}
