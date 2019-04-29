@@ -5,7 +5,7 @@ import ErrorPage from "./error-page";
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Switch>
         {/* TODO: need to add home page for path="/" */}
         <Route exact path="/" component={EpisodePage} />
