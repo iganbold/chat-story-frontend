@@ -3,7 +3,7 @@ import EpisodeItem from "../episode-item";
 import styled from "styled-components";
 import { Box } from "grommet";
 
-const Space = styled.div`
+const BottomSpace = styled.div`
   width: 100%;
   min-height: 200px;
 `;
@@ -27,6 +27,13 @@ class EpisodeList extends React.Component {
     this.bottomDummyDiv.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  isHideActorName = (actorID, index) => {
+    if (index !== 0) {
+      return this.props.dialogs[index - 1].actorID === actorID ? true : false;
+    }
+    return false;
+  };
+
   render() {
     const { dialogs, style } = this.props;
     return (
@@ -34,7 +41,7 @@ class EpisodeList extends React.Component {
         flex
         direction="column"
         overflow="auto"
-        onClick={this.handleOnClick}
+        onClick={() => this.handleOnClick}
         background="white"
         pad={{
           top: "10px"
@@ -42,12 +49,14 @@ class EpisodeList extends React.Component {
       >
         {dialogs.map((dialog, index) => (
           <EpisodeItem
+            hideActorName={this.isHideActorName(dialog.actorID, index)}
             key={index}
             dialog={dialog}
+            actor={this.props.actors[dialog.actorID]}
             style={style[dialog.actorID]}
           />
         ))}
-        <Space ref={this.bottomDummyDiv} />
+        <BottomSpace ref={this.bottomDummyDiv} />
       </Box>
     );
   }
