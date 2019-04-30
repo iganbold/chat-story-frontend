@@ -7,7 +7,6 @@ import ActorName from "../actor-name";
 const Item = styled.div`
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
 `;
 
 const TopRow = styled.div`
