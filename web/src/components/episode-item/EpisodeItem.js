@@ -2,19 +2,32 @@ import React from "react";
 import styled from "styled-components";
 import TextDialog from "../text-dialog/";
 import ActorAvator from "../actor-avatar";
+import ActorName from "../actor-name";
 
 const Item = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+`;
+
+const TopRow = styled.div`
+  display: flex;
+  flex-direction: ${props =>
+    props.dialogDirection === "incoming" ? "row" : "row-reverse"};
+`;
+
+const BottomRow = styled.div`
   display: flex;
   flex-direction: ${props =>
     props.dialogDirection === "incoming" ? "row" : "row-reverse"};
   align-items: flex-end;
-  margin: 10px 0px 0px;
+  margin-top: 5px;
 `;
 
 const EpisodeItem = props => {
-  const { dialog, style } = props;
+  const { actor, dialog, style, hideActorName } = props;
 
-  const renderDialog = (dialog, style) => {
+  const renderDialog = () => {
     switch (dialog.type) {
       case "TEXT_DIALOG":
         return (
@@ -26,23 +39,36 @@ const EpisodeItem = props => {
           />
         );
       default:
-        // TODO: need to return default dialog
+        // TODO: need to return a default dialog
         return <TextDialog value=" " />;
     }
   };
 
-  const renderAvatar = style => (
+  const renderActorAvatar = () => (
     <ActorAvator
       themeBackgroundColor={style.avatarBackgroundColor}
       themeDialogDirection={style.dialogDirection}
-      value={style.actorInitial}
+      value={actor.initial}
+    />
+  );
+
+  const renderActorName = () => (
+    <ActorName
+      hide={hideActorName}
+      themeDialogDirection={style.dialogDirection}
+      value={actor.name}
     />
   );
 
   return (
-    <Item dialogDirection={style.dialogDirection}>
-      {renderAvatar(style)}
-      {renderDialog(dialog, style)}
+    <Item>
+      <TopRow dialogDirection={style.dialogDirection}>
+        {renderActorName()}
+      </TopRow>
+      <BottomRow dialogDirection={style.dialogDirection}>
+        {renderActorAvatar()}
+        {renderDialog()}
+      </BottomRow>
     </Item>
   );
 };

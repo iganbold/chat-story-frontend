@@ -6,19 +6,21 @@ const mockEpisode = {
   episodeName: "Episode 1",
   style: {
     "0001": {
-      actorInitial: "J",
       dialogDirection: "incoming",
       dialogBackgroundColor: "#FD6FFF",
       dialogColor: "white",
       avatarBackgroundColor: "#dfdfdf"
     },
     "0002": {
-      actorInitial: "K",
       dialogDirection: "outgoing",
       dialogBackgroundColor: "#9c88ff",
       dialogColor: "white",
       avatarBackgroundColor: "#dfdfdf"
     }
+  },
+  actors: {
+    "0001": { name: "Jack", initial: "J", about: "Jack yara yara about" },
+    "0002": { name: "Kelly", initial: "K", about: "Kelly yara yara about" }
   },
   dialogs: [
     {
@@ -232,6 +234,7 @@ class EpisodePage extends Component {
                 )}
                 <Box flex width="medium">
                   <EpisodeList
+                    actors={mockEpisode.actors}
                     onNextDialog={this.handleNextDialog}
                     dialogs={this.state.currentDialogs}
                     style={mockEpisode.style}
