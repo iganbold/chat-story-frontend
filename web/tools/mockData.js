@@ -2,20 +2,10 @@ const story = {
   description: "story description",
   genres: ["genre 1", "genre 2", "genre 3"],
   coverImageURL: "https://text.io/coverimage.png",
-  actors: [
-    {
-      id: "0001",
-      name: "Jack",
-      initial: "J",
-      about: "Jack yara yara about"
-    },
-    {
-      id: "0002",
-      name: "Kelly",
-      initial: "K",
-      about: "Kelly yara yara about"
-    }
-  ],
+  actors: {
+    "0001": { name: "Jack", initial: "J", about: "Jack yara yara about" },
+    "0002": { name: "Kelly", initial: "K", about: "Kelly yara yara about" }
+  },
   episodes: [
     {
       episodeName: "Episode 1",
