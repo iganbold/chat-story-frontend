@@ -12,7 +12,7 @@ const Bubble = styled.div`
   color: ${props => props.themeTextColor};
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
   padding: 10px 15px;
-  max-width: 70%;
+  max-width: 60%;
   height: auto;
   margin: 0px 2.5px;
 `;
