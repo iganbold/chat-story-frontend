@@ -24,15 +24,15 @@ const mockEpisode = {
   },
   dialogs: [
     {
+      type: "TYPING_DIALOG",
+      actorID: "0001"
+    },
+    {
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
         value: "Tik Tok"
       }
-    },
-    {
-      type: "TYPING_DIALOG",
-      actorID: "0002"
     },
     {
       type: "TYPING_DIALOG",
@@ -44,6 +44,10 @@ const mockEpisode = {
       payload: {
         value: "Hello"
       }
+    },
+    {
+      type: "TYPING_DIALOG",
+      actorID: "0002"
     },
     {
       type: "TEXT_DIALOG",
@@ -183,21 +187,23 @@ class EpisodePage extends Component {
 
     this.state = {
       currentDialogs: [],
-      currentDialogIndex: 0,
+      nextDialogIndex: 0,
       showFooter: true
     };
   }
 
   handleNextDialog = () => {
-    if (this.state.currentDialogIndex !== mockEpisode.dialogs.length) {
-      const tempDialogs = this.state.currentDialogs.concat([
-        mockEpisode.dialogs[this.state.currentDialogIndex]
-      ]);
+    if (this.isStoryEnd()) {
+      let currentDialogs = this.state.currentDialogs;
 
-      const tempIndex = this.state.currentDialogIndex + 1;
+      if (this.isPreviosDialogTypingDialog()) {
+        // remove previous typing dialog indicator
+        currentDialogs = currentDialogs.slice(0, currentDialogs.length - 1);
+      }
+
       this.setState({
-        currentDialogs: tempDialogs,
-        currentDialogIndex: tempIndex
+        currentDialogs: this.getNextDialogs(currentDialogs),
+        nextDialogIndex: this.state.nextDialogIndex + 1
       });
     }
 
@@ -208,8 +214,29 @@ class EpisodePage extends Component {
     }
   };
 
+  isStoryEnd = () => {
+    return this.state.nextDialogIndex !== mockEpisode.dialogs.length
+      ? true
+      : false;
+  };
+
+  isPreviosDialogTypingDialog = () => {
+    const currentDialogs = this.state.currentDialogs;
+
+    return currentDialogs.length > 0 &&
+      currentDialogs[currentDialogs.length - 1].type === "TYPING_DIALOG"
+      ? true
+      : false;
+  };
+
+  getNextDialogs = currentDialogs => {
+    return currentDialogs.concat([
+      mockEpisode.dialogs[this.state.nextDialogIndex]
+    ]);
+  };
+
   getReadingPercentage = () => {
-    return (this.state.currentDialogIndex / mockEpisode.dialogs.length) * 100;
+    return (this.state.nextDialogIndex / mockEpisode.dialogs.length) * 100;
   };
 
   render() {
