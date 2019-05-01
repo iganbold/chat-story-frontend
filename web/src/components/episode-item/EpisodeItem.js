@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import TextDialog from "../text-dialog/";
+import TypingDialog from "../typing-dialog/";
 import ActorAvator from "../actor-avatar";
 import ActorName from "../actor-name";
 
@@ -32,6 +33,14 @@ const EpisodeItem = props => {
         return (
           <TextDialog
             value={dialog.payload.value}
+            themeDialogDirection={style.dialogDirection}
+            themeTextColor={style.dialogColor}
+            themeBackgroundColor={style.dialogBackgroundColor}
+          />
+        );
+      case "TYPING_DIALOG":
+        return (
+          <TypingDialog
             themeDialogDirection={style.dialogDirection}
             themeTextColor={style.dialogColor}
             themeBackgroundColor={style.dialogBackgroundColor}

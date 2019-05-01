@@ -31,6 +31,14 @@ const mockEpisode = {
       }
     },
     {
+      type: "TYPING_DIALOG",
+      actorID: "0002"
+    },
+    {
+      type: "TYPING_DIALOG",
+      actorID: "0001"
+    },
+    {
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
