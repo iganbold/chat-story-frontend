@@ -211,7 +211,7 @@ class EpisodePage extends Component {
       let previousDialogs = this.state.currentDialogs;
 
       // remove previous typing dialog indicator
-      if (this.isPreviosDialogTypingDialog()) {
+      if (this.isPreviousDialogTypingDialog()) {
         previousDialogs = previousDialogs.slice(0, previousDialogs.length - 1);
       }
 
@@ -243,7 +243,7 @@ class EpisodePage extends Component {
       : false;
   };
 
-  isPreviosDialogTypingDialog = () => {
+  isPreviousDialogTypingDialog = () => {
     const currentDialogs = this.state.currentDialogs;
 
     return currentDialogs.length > 0 &&
