@@ -24,10 +24,6 @@ const mockEpisode = {
   },
   dialogs: [
     {
-      type: "TYPING_DIALOG",
-      actorID: "0001"
-    },
-    {
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
@@ -55,6 +51,24 @@ const mockEpisode = {
       payload: {
         value: "hi"
       }
+    },
+    {
+      type: "TEXT_DIALOG",
+      actorID: "0002",
+      payload: {
+        value: "Send and Receive Free Text Messages from your PC for FREE."
+      }
+    },
+    {
+      type: "TEXT_DIALOG",
+      actorID: "0002",
+      payload: {
+        value: "beyond alphanumeric text to include multimedia messages"
+      }
+    },
+    {
+      type: "TYPING_DIALOG",
+      actorID: "0001"
     },
     {
       type: "TEXT_DIALOG",
@@ -194,15 +208,24 @@ class EpisodePage extends Component {
 
   handleNextDialog = () => {
     if (this.isStoryEnd()) {
-      let currentDialogs = this.state.currentDialogs;
+      let previousDialogs = this.state.currentDialogs;
 
+      // remove previous typing dialog indicator
       if (this.isPreviosDialogTypingDialog()) {
-        // remove previous typing dialog indicator
-        currentDialogs = currentDialogs.slice(0, currentDialogs.length - 1);
+        previousDialogs = previousDialogs.slice(0, previousDialogs.length - 1);
+      }
+
+      const nextDialogs = this.getNextDialogs(previousDialogs);
+
+      // hide previous dialog actor avatar if previous dialog actor is same as next dialog actor
+      if (
+        this.shouldHidePreviousDialogAvatar(nextDialogs, nextDialogs.length - 1)
+      ) {
+        nextDialogs[nextDialogs.length - 2].payload.hideActorAvatar = true;
       }
 
       this.setState({
-        currentDialogs: this.getNextDialogs(currentDialogs),
+        currentDialogs: nextDialogs,
         nextDialogIndex: this.state.nextDialogIndex + 1
       });
     }
@@ -227,6 +250,15 @@ class EpisodePage extends Component {
       currentDialogs[currentDialogs.length - 1].type === "TYPING_DIALOG"
       ? true
       : false;
+  };
+
+  shouldHidePreviousDialogAvatar = (dialogs, lastIndex) => {
+    if (lastIndex !== 0) {
+      return dialogs[lastIndex - 1].actorID === dialogs[lastIndex].actorID
+        ? true
+        : false;
+    }
+    return false;
   };
 
   getNextDialogs = currentDialogs => {

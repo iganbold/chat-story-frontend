@@ -27,7 +27,7 @@ class EpisodeList extends React.Component {
     this.bottomDummyDiv.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  isHideActorName = (actorID, index) => {
+  isPreviousActorSame = (actorID, index) => {
     if (index !== 0) {
       return this.props.dialogs[index - 1].actorID === actorID ? true : false;
     }
@@ -47,15 +47,22 @@ class EpisodeList extends React.Component {
           top: "10px"
         }}
       >
-        {dialogs.map((dialog, index) => (
-          <EpisodeItem
-            hideActorName={this.isHideActorName(dialog.actorID, index)}
-            key={index}
-            dialog={dialog}
-            actor={this.props.actors[dialog.actorID]}
-            style={style[dialog.actorID]}
-          />
-        ))}
+        {dialogs.map((dialog, index) => {
+          return (
+            <EpisodeItem
+              hideActorAvatar={
+                dialog.payload && dialog.payload.hideActorAvatar
+                  ? dialog.payload.hideActorAvatar
+                  : false
+              }
+              hideActorName={this.isPreviousActorSame(dialog.actorID, index)}
+              key={index}
+              dialog={dialog}
+              actor={this.props.actors[dialog.actorID]}
+              style={style[dialog.actorID]}
+            />
+          );
+        })}
         <BottomSpace ref={this.bottomDummyDiv} />
       </Box>
     );
