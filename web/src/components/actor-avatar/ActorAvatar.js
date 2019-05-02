@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Avatar = styled.div`
   display: flex;
+  visibility: ${props => (props.hide === true ? "hidden" : "visible")};
   justify-content: center;
   align-items: center;
   border-radius: 50%;
@@ -22,6 +23,7 @@ const Avatar = styled.div`
 const ActorAvatar = props => {
   return (
     <Avatar
+      hide={props.hide}
       themeBackgroundColor={props.themeBackgroundColor}
       themeDialogDirection={props.themeDialogDirection}
     >
