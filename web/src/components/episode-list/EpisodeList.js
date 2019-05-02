@@ -41,7 +41,7 @@ class EpisodeList extends React.Component {
         flex
         direction="column"
         overflow="auto"
-        onClick={() => this.handleOnClick}
+        onClick={this.handleOnClick}
         background="white"
         pad={{
           top: "10px"
