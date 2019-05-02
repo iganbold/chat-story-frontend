@@ -1,18 +1,14 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import AnimationDialog from "../animation-dialog";
 
 const BlinkKeyFrames = keyframes`
   50% {
     opacity: 1;
   }
 `;
-const PulgeKeyFrames = keyframes`
-  50% {
-    transform: scale(1.05);
-  }
-`;
 
-const Typing = styled.div`
+const Typing = styled(AnimationDialog)`
   background: ${props => props.themeBackgroundColor};
   border-radius: ${props =>
     props.themeDialogDirection === "incoming"
@@ -23,7 +19,6 @@ const Typing = styled.div`
   padding: 10px 15px;
   height: auto;
   margin: 0px 2.5px;
-  animation: 2s ${PulgeKeyFrames} infinite ease-out;
 `;
 
 const Dot = styled.span`

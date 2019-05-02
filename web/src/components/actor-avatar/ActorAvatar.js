@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import BouncyKeyFrames from "../keyframes/bouncy";
 
 const Avatar = styled.div`
   display: flex;
@@ -18,6 +19,9 @@ const Avatar = styled.div`
     props.themeDialogDirection === "incoming" ? "5px" : "2.5px"};
   margin-right: ${props =>
     props.themeDialogDirection !== "incoming" ? "5px" : "2.5px"};
+
+  transform-origin: 50% 100%;
+  animation: 0.3s ${BouncyKeyFrames} forwards ease;
 `;
 
 const ActorAvatar = props => {

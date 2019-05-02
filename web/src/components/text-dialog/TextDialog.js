@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import AnimationDialog from "../animation-dialog";
 
-const Bubble = styled.div`
+const Bubble = styled(AnimationDialog)`
   display: inline-block;
   position: relative;
   background: ${props => props.themeBackgroundColor};
