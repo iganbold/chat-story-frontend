@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import EpisodeList from "../../components/episode-list";
 import { Box, Heading, ResponsiveContext, Meter, Keyboard } from "grommet";
-import { EpisodeData } from "../../data/episodedata";
+import { EpisodeData } from "../../data/";
 
 const EpisodeBar = props => (
   <Box
