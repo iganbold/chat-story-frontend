@@ -1,175 +1,7 @@
 import React, { Component } from "react";
 import EpisodeList from "../../components/episode-list";
 import { Box, Heading, ResponsiveContext, Meter, Keyboard } from "grommet";
-
-const mockEpisode = {
-  episodeName: "Episode 1",
-  style: {
-    "0001": {
-      dialogDirection: "incoming",
-      dialogBackgroundColor: "#FD6FFF",
-      dialogColor: "white",
-      avatarBackgroundColor: "#dfdfdf"
-    },
-    "0002": {
-      dialogDirection: "outgoing",
-      dialogBackgroundColor: "#9c88ff",
-      dialogColor: "white",
-      avatarBackgroundColor: "#dfdfdf"
-    }
-  },
-  actors: {
-    "0001": { name: "Jack", initial: "J", about: "Jack yara yara about" },
-    "0002": { name: "Kelly", initial: "K", about: "Kelly yara yara about" }
-  },
-  dialogs: [
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0001",
-      payload: {
-        value: "Tik Tok"
-      }
-    },
-    {
-      type: "TYPING_DIALOG",
-      actorID: "0001"
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0001",
-      payload: {
-        value: "Hello"
-      }
-    },
-    {
-      type: "TYPING_DIALOG",
-      actorID: "0002"
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0002",
-      payload: {
-        value: "hi"
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0002",
-      payload: {
-        value: "Send and Receive Free Text Messages from your PC for FREE."
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0002",
-      payload: {
-        value: "beyond alphanumeric text to include multimedia messages"
-      }
-    },
-    {
-      type: "TYPING_DIALOG",
-      actorID: "0001"
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0001",
-      payload: {
-        value: "How are you?"
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0002",
-      payload: {
-        value: "I am good. How are you? What time are you coming?"
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0001",
-      payload: {
-        value: "I will be there at 6pm."
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0002",
-      payload: {
-        value: "👍 See you soon"
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0001",
-      payload: {
-        value: "Hello"
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0002",
-      payload: {
-        value: "hi"
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0001",
-      payload: {
-        value: "How are you?"
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0002",
-      payload: {
-        value: "I am good. How are you? What time are you coming?"
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0001",
-      payload: {
-        value: "I will be there at 6pm."
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0002",
-      payload: {
-        value: "👍 See you soon"
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0001",
-      payload: {
-        value: "How are you?"
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0002",
-      payload: {
-        value: "I am good. How are you? What time are you coming?"
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0001",
-      payload: {
-        value: "I will be there at 6pm."
-      }
-    },
-    {
-      type: "TEXT_DIALOG",
-      actorID: "0002",
-      payload: {
-        value: "👍 See you soon"
-      }
-    }
-  ]
-};
+import { EpisodeData } from "../../data/episodedata";
 
 const EpisodeBar = props => (
   <Box
@@ -238,7 +70,7 @@ class EpisodePage extends Component {
   };
 
   isStoryEnd = () => {
-    return this.state.nextDialogIndex !== mockEpisode.dialogs.length
+    return this.state.nextDialogIndex !== EpisodeData.dialogs.length
       ? true
       : false;
   };
@@ -263,12 +95,12 @@ class EpisodePage extends Component {
 
   getNextDialogs = currentDialogs => {
     return currentDialogs.concat([
-      mockEpisode.dialogs[this.state.nextDialogIndex]
+      EpisodeData.dialogs[this.state.nextDialogIndex]
     ]);
   };
 
   getReadingPercentage = () => {
-    return (this.state.nextDialogIndex / mockEpisode.dialogs.length) * 100;
+    return (this.state.nextDialogIndex / EpisodeData.dialogs.length) * 100;
   };
 
   render() {
@@ -301,10 +133,10 @@ class EpisodePage extends Component {
                 )}
                 <Box flex width="medium">
                   <EpisodeList
-                    actors={mockEpisode.actors}
+                    actors={EpisodeData.actors}
                     onNextDialog={this.handleNextDialog}
                     dialogs={this.state.currentDialogs}
-                    style={mockEpisode.style}
+                    style={EpisodeData.style}
                   />
                 </Box>
                 {size !== "small" && (
