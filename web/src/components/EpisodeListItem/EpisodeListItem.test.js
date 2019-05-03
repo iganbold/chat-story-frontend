@@ -1,18 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import EpisodeItem from "./EpisodeListItem";
+import EpisodeListItem from "./EpisodeListItem";
 import { actors, episode } from "../../../tools/mockData";
 
-it("EpisodeItem renders without crashing", () => {
+it("EpisodeListItem renders without crashing", () => {
+  const customDialog = { actor: actors["0001"], ...episode.dialogs[0] };
+  const customTheme = {
+    ...episode.style["0001"],
+    hideActorAvatar: false,
+    hideActorName: false
+  };
   const div = document.createElement("div");
 
   ReactDOM.render(
-    <EpisodeItem
-      hideActorName={false}
-      actor={actors[episode.dialogs[0].actorID]}
-      dialog={episode.dialogs[0]}
-      style={episode.style}
-    />,
+    <EpisodeListItem dialog={customDialog} customTheme={customTheme} />,
     div
   );
   ReactDOM.unmountComponentAtNode(div);

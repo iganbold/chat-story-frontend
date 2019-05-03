@@ -1,43 +1,29 @@
 import React from "react";
-import styled from "styled-components";
+import { Box } from "grommet";
 import TextDialog from "../TextDialog/";
 import TypingDialog from "../TypingDialog/";
 import ActorAvatar from "../ActorAvatar";
 import ActorName from "../ActorName";
 
-const Item = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const TopRow = styled.div`
-  display: flex;
-  flex-direction: ${props =>
-    props.dialogDirection === "incoming" ? "row" : "row-reverse"};
-`;
-
-const BottomRow = styled.div`
-  display: flex;
-  flex-direction: ${props =>
-    props.dialogDirection === "incoming" ? "row" : "row-reverse"};
-  align-items: flex-end;
-  margin-top: 5px;
-`;
-
 const EpisodeListItem = props => {
-  const { actor, dialog, customTheme, hideActorAvatar, hideActorName } = props;
-  const theme = {
-    direction: customTheme.dialogDirection,
-    color: customTheme.dialogColor,
-    background: customTheme.dialogBackgroundColor
-  };
+  const { dialog, customTheme } = props;
+  const incoming = customTheme.dialogDirection === "incoming" ? true : false;
 
   const renderDialog = () => {
+    const dialogTheme = {
+      transformX: incoming ? "0%" : "100%",
+      radius: incoming ? "20px 20px 20px 5px" : "20px 20px 5px 20px",
+      color: customTheme.dialogColor,
+      background: customTheme.dialogBackgroundColor
+    };
+
     switch (dialog.type) {
       case "TEXT_DIALOG":
-        return <TextDialog label={dialog.payload.value} customTheme={theme} />;
+        return (
+          <TextDialog label={dialog.payload.value} customTheme={dialogTheme} />
+        );
       case "TYPING_DIALOG":
-        return <TypingDialog customTheme={theme} />;
+        return <TypingDialog customTheme={dialogTheme} />;
       default:
         // TODO: need to return a default dialog
         return <TextDialog value=" " />;
@@ -46,33 +32,45 @@ const EpisodeListItem = props => {
 
   const renderActorAvatar = () => (
     <ActorAvatar
-      hide={hideActorAvatar}
       customTheme={{
+        visibility: customTheme.hideActorAvatar === true ? "hidden" : "visible",
         background: customTheme.avatarBackgroundColor,
-        direction: customTheme.dialogDirection
+        margin: {
+          left: incoming ? "5px" : "2.5px",
+          right: !incoming ? "5px" : "2.5px"
+        }
       }}
-      label={actor.initial}
+      label={dialog.actor.initial}
     />
   );
 
   const renderActorName = () => (
     <ActorName
-      hide={hideActorName}
-      label={actor.name}
-      themeDialogDirection={customTheme.dialogDirection}
+      label={dialog.actor.name}
+      customTheme={{
+        display: customTheme.hideActorName === true ? "none" : "block",
+        margin: {
+          left: incoming ? "45px" : "0px",
+          right: !incoming ? "45px" : "0px"
+        }
+      }}
     />
   );
 
   return (
-    <Item>
-      <TopRow dialogDirection={customTheme.dialogDirection}>
+    <Box flex={false} direction="column">
+      <Box direction={incoming ? "row" : "row-reverse"}>
         {renderActorName()}
-      </TopRow>
-      <BottomRow dialogDirection={customTheme.dialogDirection}>
+      </Box>
+      <Box
+        direction={incoming ? "row" : "row-reverse"}
+        align="end"
+        margin={{ top: "5px" }}
+      >
         {renderActorAvatar()}
         {renderDialog()}
-      </BottomRow>
-    </Item>
+      </Box>
+    </Box>
   );
 };
 
