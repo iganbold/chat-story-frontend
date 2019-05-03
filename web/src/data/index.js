@@ -3,15 +3,15 @@ export const EpisodeData = {
   style: {
     "0001": {
       dialogDirection: "incoming",
-      dialogBackgroundColor: "#FD6FFF",
-      dialogColor: "white",
-      avatarBackgroundColor: "#dfdfdf"
+      dialogBackgroundColor: "#D4D8DC",
+      dialogColor: "black",
+      avatarBackgroundColor: "#EFEFEF"
     },
     "0002": {
       dialogDirection: "outgoing",
-      dialogBackgroundColor: "#9c88ff",
+      dialogBackgroundColor: "#2f89fc",
       dialogColor: "white",
-      avatarBackgroundColor: "#dfdfdf"
+      avatarBackgroundColor: "#EFEFEF"
     }
   },
   actors: {
