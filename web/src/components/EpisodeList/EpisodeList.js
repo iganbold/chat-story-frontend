@@ -59,7 +59,7 @@ class EpisodeList extends React.Component {
               key={index}
               dialog={dialog}
               actor={this.props.actors[dialog.actorID]}
-              style={style[dialog.actorID]}
+              customTheme={style[dialog.actorID]}
             />
           );
         })}

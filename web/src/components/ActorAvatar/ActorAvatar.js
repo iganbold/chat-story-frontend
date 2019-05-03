@@ -8,7 +8,7 @@ const Avatar = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: ${props => props.themeBackgroundColor};
+  background: ${props => props.customTheme.background};
   color: #585858;
   font-size: 13px;
   font-weight: bold;
@@ -16,24 +16,14 @@ const Avatar = styled.div`
   min-width: 25px;
   height: 25px;
   margin-left: ${props =>
-    props.themeDialogDirection === "incoming" ? "5px" : "2.5px"};
+    props.customTheme.direction === "incoming" ? "5px" : "2.5px"};
   margin-right: ${props =>
-    props.themeDialogDirection !== "incoming" ? "5px" : "2.5px"};
+    props.customTheme.direction !== "incoming" ? "5px" : "2.5px"};
 
   transform-origin: 50% 100%;
   animation: 0.3s ${BouncyKeyFrames} forwards ease;
 `;
 
-const ActorAvatar = props => {
-  return (
-    <Avatar
-      hide={props.hide}
-      themeBackgroundColor={props.themeBackgroundColor}
-      themeDialogDirection={props.themeDialogDirection}
-    >
-      {props.value}
-    </Avatar>
-  );
-};
+const ActorAvatar = props => <Avatar {...props}>{props.label}</Avatar>;
 
 export default ActorAvatar;

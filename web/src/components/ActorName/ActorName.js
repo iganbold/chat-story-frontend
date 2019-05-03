@@ -14,7 +14,7 @@ const Name = styled.div`
 const ActorName = props => {
   return (
     <Name hide={props.hide} themeDialogDirection={props.themeDialogDirection}>
-      {props.value}
+      {props.label}
     </Name>
   );
 };

@@ -9,12 +9,12 @@ const BlinkKeyFrames = keyframes`
 `;
 
 const Typing = styled(AnimationDialog)`
-  background: ${props => props.themeBackgroundColor};
+  background: ${props => props.customTheme.background};
   border-radius: ${props =>
-    props.themeDialogDirection === "incoming"
+    props.customTheme.direction === "incoming"
       ? "20px 20px 20px 5px"
       : "20px 20px 5px 20px"};
-  color: ${props => props.themeTextColor};
+  color: ${props => props.customTheme.color};
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
   padding: 10px 15px;
   height: auto;
@@ -45,11 +45,7 @@ const Dot = styled.span`
 
 const TypingDialog = props => {
   return (
-    <Typing
-      themeDialogDirection={props.themeDialogDirection}
-      themeTextColor={props.themeTextColor}
-      themeBackgroundColor={props.themeBackgroundColor}
-    >
+    <Typing {...props}>
       <Dot />
       <Dot />
       <Dot />

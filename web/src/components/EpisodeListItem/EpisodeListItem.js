@@ -25,27 +25,19 @@ const BottomRow = styled.div`
 `;
 
 const EpisodeListItem = props => {
-  const { actor, dialog, style, hideActorAvatar, hideActorName } = props;
+  const { actor, dialog, customTheme, hideActorAvatar, hideActorName } = props;
+  const theme = {
+    direction: customTheme.dialogDirection,
+    color: customTheme.dialogColor,
+    background: customTheme.dialogBackgroundColor
+  };
 
   const renderDialog = () => {
     switch (dialog.type) {
       case "TEXT_DIALOG":
-        return (
-          <TextDialog
-            value={dialog.payload.value}
-            themeDialogDirection={style.dialogDirection}
-            themeTextColor={style.dialogColor}
-            themeBackgroundColor={style.dialogBackgroundColor}
-          />
-        );
+        return <TextDialog label={dialog.payload.value} customTheme={theme} />;
       case "TYPING_DIALOG":
-        return (
-          <TypingDialog
-            themeDialogDirection={style.dialogDirection}
-            themeTextColor={style.dialogColor}
-            themeBackgroundColor={style.dialogBackgroundColor}
-          />
-        );
+        return <TypingDialog customTheme={theme} />;
       default:
         // TODO: need to return a default dialog
         return <TextDialog value=" " />;
@@ -55,26 +47,28 @@ const EpisodeListItem = props => {
   const renderActorAvatar = () => (
     <ActorAvatar
       hide={hideActorAvatar}
-      themeBackgroundColor={style.avatarBackgroundColor}
-      themeDialogDirection={style.dialogDirection}
-      value={actor.initial}
+      customTheme={{
+        background: customTheme.avatarBackgroundColor,
+        direction: customTheme.dialogDirection
+      }}
+      label={actor.initial}
     />
   );
 
   const renderActorName = () => (
     <ActorName
       hide={hideActorName}
-      themeDialogDirection={style.dialogDirection}
-      value={actor.name}
+      label={actor.name}
+      themeDialogDirection={customTheme.dialogDirection}
     />
   );
 
   return (
     <Item>
-      <TopRow dialogDirection={style.dialogDirection}>
+      <TopRow dialogDirection={customTheme.dialogDirection}>
         {renderActorName()}
       </TopRow>
-      <BottomRow dialogDirection={style.dialogDirection}>
+      <BottomRow dialogDirection={customTheme.dialogDirection}>
         {renderActorAvatar()}
         {renderDialog()}
       </BottomRow>

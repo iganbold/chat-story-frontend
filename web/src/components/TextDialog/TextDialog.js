@@ -5,12 +5,12 @@ import AnimationDialog from "../AnimationDialog";
 const Bubble = styled(AnimationDialog)`
   display: inline-block;
   position: relative;
-  background: ${props => props.themeBackgroundColor};
+  background: ${props => props.customTheme.background};
   border-radius: ${props =>
-    props.themeDialogDirection === "incoming"
+    props.customTheme.direction === "incoming"
       ? "20px 20px 20px 5px"
       : "20px 20px 5px 20px"};
-  color: ${props => props.themeTextColor};
+  color: ${props => props.customTheme.color};
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
   padding: 10px 15px;
   max-width: 60%;
@@ -18,16 +18,6 @@ const Bubble = styled(AnimationDialog)`
   margin: 0px 2.5px;
 `;
 
-const TextDialog = props => {
-  return (
-    <Bubble
-      themeDialogDirection={props.themeDialogDirection}
-      themeTextColor={props.themeTextColor}
-      themeBackgroundColor={props.themeBackgroundColor}
-    >
-      {props.value}
-    </Bubble>
-  );
-};
+const TextDialog = props => <Bubble {...props}>{props.label}</Bubble>;
 
 export default TextDialog;
