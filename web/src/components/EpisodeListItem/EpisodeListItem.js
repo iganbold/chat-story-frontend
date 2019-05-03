@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import TextDialog from "../TextDialog/";
-import TypingDialog from "../TextDialog/";
+import TypingDialog from "../TypingDialog/";
 import ActorAvatar from "../ActorAvatar";
 import ActorName from "../ActorName";
 
