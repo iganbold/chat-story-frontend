@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import EpisodePage from "./episode-page";
+import EpisodePage from "./EpisodePage";
 import ErrorPage from "./error-page";
 
 function App() {
