@@ -1,24 +1,11 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import AnimationDialog from "../AnimationDialog";
+import Bubble from "../Bubble";
 
 const BlinkKeyFrames = keyframes`
   50% {
     opacity: 1;
   }
-`;
-
-const Typing = styled(AnimationDialog)`
-  background: ${props => props.customTheme.background};
-  border-radius: ${props =>
-    props.customTheme.direction === "incoming"
-      ? "20px 20px 20px 5px"
-      : "20px 20px 5px 20px"};
-  color: ${props => props.customTheme.color};
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-  padding: 10px 15px;
-  height: auto;
-  margin: 0px 2.5px;
 `;
 
 const Dot = styled.span`
@@ -45,11 +32,11 @@ const Dot = styled.span`
 
 const TypingDialog = props => {
   return (
-    <Typing {...props}>
+    <Bubble {...props}>
       <Dot />
       <Dot />
       <Dot />
-    </Typing>
+    </Bubble>
   );
 };
 
