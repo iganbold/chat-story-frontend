@@ -93,11 +93,10 @@ class EpisodePage extends Component {
     return false;
   };
 
-  getNextDialogs = currentDialogs => {
-    return currentDialogs.concat([
-      EpisodeData.dialogs[this.state.nextDialogIndex]
-    ]);
-  };
+  getNextDialogs = currentDialogs => [
+    ...currentDialogs,
+    EpisodeData.dialogs[this.state.nextDialogIndex]
+  ];
 
   getReadingPercentage = () => {
     return (this.state.nextDialogIndex / EpisodeData.dialogs.length) * 100;
