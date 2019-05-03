@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import AnimationDialog from "../animation-dialog";
+import AnimationDialog from "../AnimationDialog";
 
 const Bubble = styled(AnimationDialog)`
   display: inline-block;

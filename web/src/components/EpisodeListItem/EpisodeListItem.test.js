@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import EpisodeItem from "./EpisodeItem";
+import EpisodeItem from "./EpisodeListItem";
 import { actors, episode } from "../../../tools/mockData";
 
 it("EpisodeItem renders without crashing", () => {

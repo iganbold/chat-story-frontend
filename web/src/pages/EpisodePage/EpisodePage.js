@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import EpisodeList from "../../components/episode-list";
+import EpisodeList from "../../components/EpisodeList";
 import { Box, Heading, ResponsiveContext, Meter, Keyboard } from "grommet";
 import { EpisodeData } from "../../data/";
 

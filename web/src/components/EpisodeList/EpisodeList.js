@@ -1,5 +1,5 @@
 import React from "react";
-import EpisodeItem from "../episode-item";
+import EpisodeListItem from "../EpisodeListItem";
 import styled from "styled-components";
 import { Box } from "grommet";
 
@@ -49,7 +49,7 @@ class EpisodeList extends React.Component {
       >
         {dialogs.map((dialog, index) => {
           return (
-            <EpisodeItem
+            <EpisodeListItem
               hideActorAvatar={
                 dialog.payload && dialog.payload.hideActorAvatar
                   ? dialog.payload.hideActorAvatar

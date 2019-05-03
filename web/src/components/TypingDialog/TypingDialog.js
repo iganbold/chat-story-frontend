@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import AnimationDialog from "../animation-dialog";
+import AnimationDialog from "../AnimationDialog";
 
 const BlinkKeyFrames = keyframes`
   50% {

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import TextDialog from "../text-dialog/";
-import TypingDialog from "../typing-dialog/";
-import ActorAvatar from "../actor-avatar";
-import ActorName from "../actor-name";
+import TextDialog from "../TextDialog/";
+import TypingDialog from "../TextDialog/";
+import ActorAvatar from "../ActorAvatar";
+import ActorName from "../ActorName";
 
 const Item = styled.div`
   display: flex;
@@ -24,7 +24,7 @@ const BottomRow = styled.div`
   margin-top: 5px;
 `;
 
-const EpisodeItem = props => {
+const EpisodeListItem = props => {
   const { actor, dialog, style, hideActorAvatar, hideActorName } = props;
 
   const renderDialog = () => {
@@ -82,4 +82,4 @@ const EpisodeItem = props => {
   );
 };
 
-export default EpisodeItem;
+export default EpisodeListItem;
