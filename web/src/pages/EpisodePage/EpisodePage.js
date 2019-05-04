@@ -116,8 +116,10 @@ class EpisodePage extends Component {
               <Box pad="none">
                 <Meter
                   size="full"
-                  thickness="xsmall"
-                  values={[{ value: this.getReadingPercentage() }]}
+                  thickness={size !== "small" ? "xsmall" : "4px"}
+                  values={[
+                    { color: "dark-2", value: this.getReadingPercentage() }
+                  ]}
                   aria-label="meter"
                 />
               </Box>
