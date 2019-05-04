@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import EpisodePage from "./episode-page";
-import ErrorPage from "./error-page";
+import EpisodePage from "./EpisodePage";
+import ErrorPage from "./ErrorPage";
 
 function App() {
   return (

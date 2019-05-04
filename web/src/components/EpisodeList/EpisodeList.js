@@ -1,12 +1,6 @@
 import React from "react";
-import EpisodeItem from "../episode-item";
-import styled from "styled-components";
+import EpisodeListItem from "../EpisodeListItem";
 import { Box } from "grommet";
-
-const BottomSpace = styled.div`
-  width: 100%;
-  min-height: 200px;
-`;
 
 class EpisodeList extends React.Component {
   bottomDummyDiv = React.createRef();
@@ -31,11 +25,33 @@ class EpisodeList extends React.Component {
     if (index !== 0) {
       return this.props.dialogs[index - 1].actorID === actorID ? true : false;
     }
+
     return false;
   };
 
+  getCustomTheme = (dialog, index) => {
+    const customTheme = {
+      ...this.props.style[dialog.actorID],
+      hideActorAvatar:
+        dialog.payload && dialog.payload.hideActorAvatar
+          ? dialog.payload.hideActorAvatar
+          : false,
+      hideActorName: this.isPreviousActorSame(dialog.actorID, index)
+    };
+
+    return customTheme;
+  };
+
+  getCustomDialog = dialog => {
+    const cutomDialog = {
+      ...dialog,
+      actor: this.props.actors[dialog.actorID]
+    };
+
+    return cutomDialog;
+  };
+
   render() {
-    const { dialogs, style } = this.props;
     return (
       <Box
         flex
@@ -47,23 +63,21 @@ class EpisodeList extends React.Component {
           top: "10px"
         }}
       >
-        {dialogs.map((dialog, index) => {
+        {this.props.dialogs.map((dialog, index) => {
           return (
-            <EpisodeItem
-              hideActorAvatar={
-                dialog.payload && dialog.payload.hideActorAvatar
-                  ? dialog.payload.hideActorAvatar
-                  : false
-              }
-              hideActorName={this.isPreviousActorSame(dialog.actorID, index)}
+            <EpisodeListItem
               key={index}
-              dialog={dialog}
-              actor={this.props.actors[dialog.actorID]}
-              style={style[dialog.actorID]}
+              dialog={this.getCustomDialog(dialog)}
+              customTheme={this.getCustomTheme(dialog, index)}
             />
           );
         })}
-        <BottomSpace ref={this.bottomDummyDiv} />
+        <Box
+          flex={false}
+          width="100%"
+          height="200px"
+          ref={this.bottomDummyDiv}
+        />
       </Box>
     );
   }
