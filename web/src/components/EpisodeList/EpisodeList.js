@@ -1,6 +1,7 @@
 import React from "react";
 import EpisodeListItem from "../EpisodeListItem";
 import { Box } from "grommet";
+import { ThemeProvider } from "styled-components";
 
 class EpisodeList extends React.Component {
   bottomDummyDiv = React.createRef();
@@ -28,17 +29,51 @@ class EpisodeList extends React.Component {
     return false;
   };
 
-  getCustomTheme = (dialog, index) => {
-    const customTheme = {
-      ...this.props.style[dialog.actorID],
-      hideActorAvatar:
-        dialog.payload && dialog.payload.hideActorAvatar
-          ? dialog.payload.hideActorAvatar
-          : false,
-      hideActorName: this.isPreviousActorSame(dialog.actorID, index)
+  getCustomTheme = (dialog, index, incoming) => {
+    const actorStyle = this.props.style[dialog.actorID];
+    const hideActorAvatar =
+      dialog.payload && dialog.payload.hideActorAvatar
+        ? dialog.payload.hideActorAvatar
+        : false;
+
+    const theme = {
+      animationDialog: {
+        transformX: incoming ? "0%" : "100%"
+      },
+
+      bubble: {
+        radius: incoming ? "20px 20px 20px 5px" : "20px 20px 5px 20px",
+        color: actorStyle.bubbleTextColor,
+        background: actorStyle.bubbleBackgroundColor
+      },
+
+      actorAvatar: {
+        visibility: hideActorAvatar ? "hidden" : "visible",
+        background: actorStyle.avatarBackgroundColor,
+        margin: {
+          left: incoming ? "5px" : "2.5px",
+          right: !incoming ? "5px" : "2.5px"
+        }
+      },
+
+      actorName: {
+        display: this.isPreviousActorSame(dialog.actorID, index)
+          ? "none"
+          : "block",
+        margin: {
+          left: incoming ? "45px" : "0px",
+          right: !incoming ? "45px" : "0px"
+        }
+      }
     };
 
-    return customTheme;
+    return theme;
+  };
+
+  isDialogIncoming = dialog => {
+    return this.props.style[dialog.actorID].dialogDirection === "incoming"
+      ? true
+      : false;
   };
 
   getCustomDialog = dialog => {
@@ -63,12 +98,15 @@ class EpisodeList extends React.Component {
         }}
       >
         {this.props.dialogs.map((dialog, index) => {
+          const incoming = this.isDialogIncoming(dialog);
           return (
-            <EpisodeListItem
-              key={index}
-              dialog={this.getCustomDialog(dialog)}
-              customTheme={this.getCustomTheme(dialog, index)}
-            />
+            <ThemeProvider theme={this.getCustomTheme(dialog, index, incoming)}>
+              <EpisodeListItem
+                key={index}
+                dialog={this.getCustomDialog(dialog)}
+                direction={incoming ? "row" : "row-reverse"}
+              />
+            </ThemeProvider>
           );
         })}
         <Box

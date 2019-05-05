@@ -1,13 +1,14 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const Name = styled.div`
-  display: ${props => props.customTheme.display};
+const style = ({ theme }) => css`
+  display: ${theme.actorName.display};
   font-size: 12px;
   color: #585858;
-  margin-left: ${props => props.customTheme.margin.left};
-  margin-right: ${props => props.customTheme.margin.right};
+  margin-left: ${theme.actorName.margin.left};
+  margin-right: ${theme.actorName.margin.right};
 `;
+const Name = styled.div([style]);
 
 const ActorName = props => <Name {...props}>{props.label}</Name>;
 

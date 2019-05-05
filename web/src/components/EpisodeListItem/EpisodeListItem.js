@@ -6,67 +6,28 @@ import ActorAvatar from "../ActorAvatar";
 import ActorName from "../ActorName";
 
 const EpisodeListItem = props => {
-  const { dialog, customTheme } = props;
-  const incoming = customTheme.dialogDirection === "incoming" ? true : false;
+  const { dialog } = props;
+
+  const renderActorName = () => <ActorName label={dialog.actor.name} />;
+
+  const renderActorAvatar = () => <ActorAvatar label={dialog.actor.initial} />;
 
   const renderDialog = () => {
-    const dialogTheme = {
-      transformX: incoming ? "0%" : "100%",
-      radius: incoming ? "20px 20px 20px 5px" : "20px 20px 5px 20px",
-      color: customTheme.dialogColor,
-      background: customTheme.dialogBackgroundColor
-    };
-
     switch (dialog.type) {
       case "TEXT_DIALOG":
-        return (
-          <TextDialog label={dialog.payload.value} customTheme={dialogTheme} />
-        );
+        return <TextDialog label={dialog.payload.value} />;
       case "TYPING_DIALOG":
-        return <TypingDialog customTheme={dialogTheme} />;
+        return <TypingDialog />;
       default:
         // TODO: need to return a default dialog
         return <TextDialog value=" " />;
     }
   };
 
-  const renderActorAvatar = () => (
-    <ActorAvatar
-      customTheme={{
-        visibility: customTheme.hideActorAvatar === true ? "hidden" : "visible",
-        background: customTheme.avatarBackgroundColor,
-        margin: {
-          left: incoming ? "5px" : "2.5px",
-          right: !incoming ? "5px" : "2.5px"
-        }
-      }}
-      label={dialog.actor.initial}
-    />
-  );
-
-  const renderActorName = () => (
-    <ActorName
-      label={dialog.actor.name}
-      customTheme={{
-        display: customTheme.hideActorName === true ? "none" : "block",
-        margin: {
-          left: incoming ? "45px" : "0px",
-          right: !incoming ? "45px" : "0px"
-        }
-      }}
-    />
-  );
-
   return (
     <Box flex={false} direction="column">
-      <Box direction={incoming ? "row" : "row-reverse"}>
-        {renderActorName()}
-      </Box>
-      <Box
-        direction={incoming ? "row" : "row-reverse"}
-        align="end"
-        margin={{ top: "5px" }}
-      >
+      <Box direction={props.direction}>{renderActorName()}</Box>
+      <Box direction={props.direction} align="end" margin={{ top: "5px" }}>
         {renderActorAvatar()}
         {renderDialog()}
       </Box>

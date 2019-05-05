@@ -3,14 +3,14 @@ export const EpisodeData = {
   style: {
     "0001": {
       dialogDirection: "incoming",
-      dialogBackgroundColor: "#D4D8DC",
-      dialogColor: "black",
+      bubbleBackgroundColor: "#D4D8DC",
+      bubbleTextColor: "black",
       avatarBackgroundColor: "#EFEFEF"
     },
     "0002": {
       dialogDirection: "outgoing",
-      dialogBackgroundColor: "#2f89fc",
-      dialogColor: "white",
+      bubbleBackgroundColor: "#2f89fc",
+      bubbleTextColor: "white",
       avatarBackgroundColor: "#EFEFEF"
     }
   },
