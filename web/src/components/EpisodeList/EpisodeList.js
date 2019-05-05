@@ -9,12 +9,11 @@ class EpisodeList extends React.Component {
     this.scrollToBottom();
   }
 
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
+  componentDidUpdate() {}
 
   handleOnClick = () => {
     this.props.onNextDialog();
+    this.scrollToBottom();
   };
 
   scrollToBottom = () => {

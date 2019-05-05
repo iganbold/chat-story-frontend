@@ -20,17 +20,27 @@ export const EpisodeData = {
   },
   dialogs: [
     {
+      id: 1,
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
-        value: "Tik Tok"
-      }
+        value: "Tik Tok",
+        options: [
+          { value: 1, label: "Number 1", trigger: "12" },
+          { value: 2, label: "Number 2", trigger: "15" },
+          { value: 3, label: "Number 3", trigger: "20" }
+        ]
+      },
+      trigger: 2
     },
     {
+      id: 2,
       type: "TYPING_DIALOG",
-      actorID: "0001"
+      actorID: "0001",
+      trigger: 3
     },
     {
+      id: 3,
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
@@ -38,10 +48,12 @@ export const EpisodeData = {
       }
     },
     {
+      id: 4,
       type: "TYPING_DIALOG",
       actorID: "0002"
     },
     {
+      id: 5,
       type: "TEXT_DIALOG",
       actorID: "0002",
       payload: {
@@ -49,6 +61,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 6,
       type: "TEXT_DIALOG",
       actorID: "0002",
       payload: {
@@ -56,6 +69,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 7,
       type: "TEXT_DIALOG",
       actorID: "0002",
       payload: {
@@ -63,10 +77,12 @@ export const EpisodeData = {
       }
     },
     {
+      id: 8,
       type: "TYPING_DIALOG",
       actorID: "0001"
     },
     {
+      id: 9,
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
@@ -74,6 +90,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 10,
       type: "TEXT_DIALOG",
       actorID: "0002",
       payload: {
@@ -81,6 +98,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 11,
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
@@ -88,6 +106,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 12,
       type: "TEXT_DIALOG",
       actorID: "0002",
       payload: {
@@ -95,6 +114,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 13,
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
@@ -102,6 +122,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 14,
       type: "TEXT_DIALOG",
       actorID: "0002",
       payload: {
@@ -109,6 +130,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 15,
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
@@ -116,6 +138,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 16,
       type: "TEXT_DIALOG",
       actorID: "0002",
       payload: {
@@ -123,6 +146,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 17,
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
@@ -130,6 +154,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 18,
       type: "TEXT_DIALOG",
       actorID: "0002",
       payload: {
@@ -137,6 +162,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 19,
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
@@ -144,6 +170,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 20,
       type: "TEXT_DIALOG",
       actorID: "0002",
       payload: {
@@ -151,6 +178,7 @@ export const EpisodeData = {
       }
     },
     {
+      id: 21,
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
@@ -158,11 +186,13 @@ export const EpisodeData = {
       }
     },
     {
+      id: 22,
       type: "TEXT_DIALOG",
       actorID: "0002",
       payload: {
         value: "👍 See you soon"
-      }
+      },
+      end: true
     }
   ]
 };

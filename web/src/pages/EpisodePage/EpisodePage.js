@@ -1,14 +1,26 @@
 import React, { Component } from "react";
 import EpisodeList from "../../components/EpisodeList";
-import { Box, Heading, ResponsiveContext, Meter, Keyboard } from "grommet";
+import {
+  Box,
+  Heading,
+  ResponsiveContext,
+  Meter,
+  Keyboard,
+  Button,
+  Layer,
+  RangeInput,
+  Text,
+  CheckBox
+} from "grommet";
+import { Edit, Catalog, Close } from "grommet-icons";
 import { EpisodeData } from "../../data/";
 
 const EpisodeBar = props => (
   <Box
-    tag="header"
+    as="header"
     direction="row"
     align="center"
-    justify="center"
+    justify="between"
     pad={{ left: "medium", right: "small", vertical: "small" }}
     style={{ zIndex: "1" }}
     {...props}
@@ -17,7 +29,7 @@ const EpisodeBar = props => (
 
 const EpisodeFooter = props => (
   <Box
-    tag="footer"
+    as="footer"
     direction="row"
     align="center"
     justify="center"
@@ -34,7 +46,12 @@ class EpisodePage extends Component {
     this.state = {
       currentDialogs: [],
       nextDialogIndex: 0,
-      showFooter: true
+      showFooter: true,
+      themeDarkMode: false,
+      showSettings: false,
+      readingAutoMode: false,
+      readingAutoModeSpeed: 0.4,
+      fontSize: 0.4
     };
   }
 
@@ -102,6 +119,21 @@ class EpisodePage extends Component {
     return (this.state.nextDialogIndex / EpisodeData.dialogs.length) * 100;
   };
 
+  handleOnThemeChange = e => this.setState({ themeDarkMode: e.target.checked });
+
+  handleOnReadingModeChange = e =>
+    this.setState({ readingAutoMode: e.target.checked });
+
+  handleCloseSettings = () => this.setState({ showSettings: false });
+
+  handleAutoModeOnChange = e => {
+    this.setState({ readingAutoModeSpeed: e.target.value });
+  };
+
+  handleFontSizeOnChange = e => {
+    this.setState({ fontSize: e.target.value });
+  };
+
   render() {
     return (
       <ResponsiveContext.Consumer>
@@ -109,9 +141,14 @@ class EpisodePage extends Component {
           <Keyboard target="document" onEnter={this.handleNextDialog}>
             <Box fill>
               <EpisodeBar>
+                <Button icon={<Catalog />} />
                 <Heading level="3" margin="none">
                   Episode 1
                 </Heading>
+                <Button
+                  icon={<Edit />}
+                  onClick={() => this.setState({ showSettings: true })}
+                />
               </EpisodeBar>
               <Box pad="none">
                 <Meter
@@ -158,6 +195,95 @@ class EpisodePage extends Component {
                 </EpisodeFooter>
               )}
             </Box>
+            {this.state.showSettings && (
+              <Layer
+                position="right"
+                full="vertical"
+                modal
+                onEsc={this.handleCloseSettings}
+                onClickOutside={this.handleCloseSettings}
+              >
+                <Box
+                  width="medium"
+                  fill="vertical"
+                  overflow="auto"
+                  pad="medium"
+                >
+                  <Box flex={false} direction="row" justify="between">
+                    <Heading level={2} margin="none">
+                      Settings
+                    </Heading>
+                    <Button
+                      icon={<Close />}
+                      onClick={this.handleCloseSettings}
+                    />
+                  </Box>
+                  <Box flex={false} direction="column">
+                    <Heading level={4}>Theme</Heading>
+                    <Box direction="row" justify="between">
+                      <Text>Dark</Text>
+                      <CheckBox
+                        toggle
+                        checked={this.state.themeDarkMode}
+                        onChange={this.handleOnThemeChange}
+                      />
+                    </Box>
+                  </Box>
+                  <Box flex={false} direction="column">
+                    <Heading level={4}>Reading Mode</Heading>
+                    <Box direction="row" justify="between">
+                      <Text>Autoplay</Text>
+                      <CheckBox
+                        toggle
+                        checked={this.state.readingAutoMode}
+                        onChange={this.handleOnReadingModeChange}
+                      />
+                    </Box>
+                    {this.state.readingAutoMode && (
+                      <Box
+                        direction="row"
+                        align="center"
+                        pad="medium"
+                        gap="small"
+                      >
+                        <Text>Slow</Text>
+                        <Box align="center" width="small">
+                          <RangeInput
+                            min={0}
+                            max={1}
+                            step={0.1}
+                            value={this.state.readingAutoModeSpeed}
+                            onChange={this.handleAutoModeOnChange}
+                          />
+                        </Box>
+                        <Text>Fast</Text>
+                      </Box>
+                    )}
+                  </Box>
+                  <Box flex={false} direction="column">
+                    <Heading level={4}>Font Size</Heading>
+                    <Box
+                      direction="row"
+                      align="center"
+                      pad="medium"
+                      gap="small"
+                    >
+                      <Text>Small</Text>
+                      <Box align="center" width="small">
+                        <RangeInput
+                          min={0}
+                          max={1}
+                          step={0.1}
+                          value={this.state.fontSize}
+                          onChange={this.handleFontSizeOnChange}
+                        />
+                      </Box>
+                      <Text>Big</Text>
+                    </Box>
+                  </Box>
+                </Box>
+              </Layer>
+            )}
           </Keyboard>
         )}
       </ResponsiveContext.Consumer>
