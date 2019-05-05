@@ -10,9 +10,7 @@ const style = ({ theme }) => css`
 `;
 const Name = styled.div([style]);
 
-const ActorName = props => <Name {...props}>{props.label}</Name>;
-
-ActorName.defaultProps = {
+Name.defaultProps = {
   theme: {
     actorName: {
       display: "none",
@@ -23,5 +21,7 @@ ActorName.defaultProps = {
     }
   }
 };
+
+const ActorName = props => <Name {...props}>{props.label}</Name>;
 
 export default ActorName;

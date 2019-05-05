@@ -18,9 +18,7 @@ const style = ({ theme }) => css`
 // BubbuleBase inherits from AnimaitonDialog
 const BubbleBase = styled(AnimationDialog)([style]);
 
-const Bubble = props => <BubbleBase {...props}>{props.children}</BubbleBase>;
-
-Bubble.defaultProps = {
+BubbleBase.defaultProps = {
   theme: {
     animationDialog: {
       transformX: "0%"
@@ -32,5 +30,7 @@ Bubble.defaultProps = {
     }
   }
 };
+
+const Bubble = props => <BubbleBase {...props}>{props.children}</BubbleBase>;
 
 export default Bubble;
