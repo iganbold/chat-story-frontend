@@ -4,13 +4,6 @@ import AnimationDialog from "./AnimationDialog";
 
 it("AnimationDialog renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(
-    <AnimationDialog
-      customTheme={{
-        transformX: "100%"
-      }}
-    />,
-    div
-  );
+  ReactDOM.render(<AnimationDialog />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

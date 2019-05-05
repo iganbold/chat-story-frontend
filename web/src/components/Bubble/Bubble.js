@@ -20,4 +20,17 @@ const BubbleBase = styled(AnimationDialog)([style]);
 
 const Bubble = props => <BubbleBase {...props}>{props.children}</BubbleBase>;
 
+Bubble.defaultProps = {
+  theme: {
+    animationDialog: {
+      transformX: "0%"
+    },
+    bubble: {
+      radius: "20px 20px 20px 5px",
+      color: "black",
+      background: "#D4D8DC"
+    }
+  }
+};
+
 export default Bubble;

@@ -12,4 +12,16 @@ const Name = styled.div([style]);
 
 const ActorName = props => <Name {...props}>{props.label}</Name>;
 
+ActorName.defaultProps = {
+  theme: {
+    actorName: {
+      display: "none",
+      margin: {
+        left: "0px",
+        right: "0px"
+      }
+    }
+  }
+};
+
 export default ActorName;

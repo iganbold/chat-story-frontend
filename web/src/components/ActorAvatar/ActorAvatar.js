@@ -24,4 +24,17 @@ const AvatarBase = styled.div([style]);
 
 const ActorAvatar = props => <AvatarBase {...props}>{props.label}</AvatarBase>;
 
+ActorAvatar.defaultProps = {
+  theme: {
+    actorAvatar: {
+      visibility: "visible",
+      background: "grey",
+      margin: {
+        left: "0px",
+        right: "0px"
+      }
+    }
+  }
+};
+
 export default ActorAvatar;

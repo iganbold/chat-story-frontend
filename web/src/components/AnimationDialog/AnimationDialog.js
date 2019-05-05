@@ -8,4 +8,12 @@ const style = ({ theme }) => css`
 
 const AnimationDialog = styled.div([style]);
 
+AnimationDialog.defaultProps = {
+  theme: {
+    animationDialog: {
+      transformX: "0%"
+    }
+  }
+};
+
 export default AnimationDialog;
