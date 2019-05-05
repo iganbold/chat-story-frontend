@@ -1,26 +1,40 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import BouncyKeyFrames from "../keyframes/bouncy";
 
-const Avatar = styled.div`
+const style = ({ theme }) => css`
   display: flex;
-  visibility: ${props => props.customTheme.visibility};
+  visibility: ${theme.actorAvatar.visibility};
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: ${props => props.customTheme.background};
+  background: ${theme.actorAvatar.background};
   color: #585858;
   font-size: 13px;
   font-weight: bold;
   width: 25px;
   min-width: 25px;
   height: 25px;
-  margin-left: ${props => props.customTheme.margin.left};
-  margin-right: ${props => props.customTheme.margin.right};
+  margin-left: ${theme.actorAvatar.margin.left};
+  margin-right: ${theme.actorAvatar.margin.right};
   transform-origin: 50% 100%;
   animation: 0.3s ${BouncyKeyFrames} forwards ease;
 `;
+const AvatarBase = styled.div([style]);
 
-const ActorAvatar = props => <Avatar {...props}>{props.label}</Avatar>;
+const ActorAvatar = props => <AvatarBase {...props}>{props.label}</AvatarBase>;
+
+ActorAvatar.defaultProps = {
+  theme: {
+    actorAvatar: {
+      visibility: "visible",
+      background: "grey",
+      margin: {
+        left: "0px",
+        right: "0px"
+      }
+    }
+  }
+};
 
 export default ActorAvatar;
