@@ -4,6 +4,7 @@ import TextDialog from "../TextDialog/";
 import TypingDialog from "../TypingDialog/";
 import ActorAvatar from "../ActorAvatar";
 import ActorName from "../ActorName";
+import ImageDialog from "../ImageDialog";
 
 const EpisodeListItem = props => {
   const { dialog } = props;
@@ -18,6 +19,8 @@ const EpisodeListItem = props => {
         return <TextDialog label={dialog.payload.value} />;
       case "TYPING_DIALOG":
         return <TypingDialog />;
+      case "IMAGE_DIALOG":
+        return <ImageDialog url={dialog.payload.url} />;
       default:
         // TODO: need to return a default dialog
         return <TextDialog value=" " />;

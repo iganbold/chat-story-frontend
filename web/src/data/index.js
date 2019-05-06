@@ -21,6 +21,15 @@ export const EpisodeData = {
   dialogs: [
     {
       id: 1,
+      type: "IMAGE_DIALOG",
+      actorID: "0001",
+      payload: {
+        url: "https://techcrunch.com/wp-content/uploads/2015/08/safe_image.gif"
+      },
+      trigger: 2
+    },
+    {
+      id: 1,
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
@@ -52,6 +61,15 @@ export const EpisodeData = {
       id: 4,
       type: "TYPING_DIALOG",
       actorID: "0002"
+    },
+    {
+      id: 5,
+      type: "IMAGE_DIALOG",
+      actorID: "0002",
+      payload: {
+        url:
+          "https://i.pinimg.com/originals/dc/7c/b8/dc7cb8c24233f9eb7f8b1147f8000103.jpg"
+      }
     },
     {
       id: 5,
