@@ -1,7 +1,8 @@
 import React from "react";
-import EpisodeListItem from "../EpisodeListItem";
 import { Box } from "grommet";
 import { ThemeProvider } from "styled-components";
+import EpisodeListItem from "../EpisodeListItem";
+import AnimatedEmoji from "../AnimatedEmoji";
 
 class EpisodeList extends React.Component {
   bottomDummyDiv = React.createRef();
@@ -97,13 +98,22 @@ class EpisodeList extends React.Component {
           top: "10px"
         }}
       >
+        {/* TODO: Remove AnimatedEmoji componenent after it's emoji animations are completed*/}
+        {this.props.showAnimatedEmoji && (
+          <AnimatedEmoji emoji={this.props.emoji} />
+        )}
         {this.props.dialogs.map((dialog, index) => {
           const incoming = this.isDialogIncoming(dialog);
+          const customDialog = this.getCustomDialog(dialog);
+
           return (
-            <ThemeProvider theme={this.getCustomTheme(dialog, index, incoming)}>
+            // FIXME: Need check theme provider b/c it seems I am creating many duplicate themes
+            <ThemeProvider
+              key={index}
+              theme={this.getCustomTheme(dialog, index, incoming)}
+            >
               <EpisodeListItem
-                key={index}
-                dialog={this.getCustomDialog(dialog)}
+                dialog={customDialog}
                 direction={incoming ? "row" : "row-reverse"}
               />
             </ThemeProvider>

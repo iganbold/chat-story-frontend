@@ -44,7 +44,8 @@ export const EpisodeData = {
       type: "TEXT_DIALOG",
       actorID: "0001",
       payload: {
-        value: "Hello"
+        value: "Happy Birthday!!!",
+        animatedEmoji: "🎂"
       }
     },
     {
@@ -65,7 +66,8 @@ export const EpisodeData = {
       type: "TEXT_DIALOG",
       actorID: "0002",
       payload: {
-        value: "Send and Receive Free Text Messages from your PC for FREE."
+        value: "Send and Receive Free Text Messages from your PC for FREE.",
+        animatedEmoji: "🦄"
       }
     },
     {
@@ -110,7 +112,8 @@ export const EpisodeData = {
       type: "TEXT_DIALOG",
       actorID: "0002",
       payload: {
-        value: "👍 See you soon"
+        value: "👍 See you soon",
+        animatedEmoji: "🍩"
       }
     },
     {
