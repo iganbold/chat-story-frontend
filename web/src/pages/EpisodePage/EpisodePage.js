@@ -51,40 +51,11 @@ class EpisodePage extends Component {
       showSettings: false,
       readingAutoMode: false,
       readingAutoModeSpeed: 0.4,
-      fontSize: 0.4
+      fontSize: 0.4,
+      showAnimatedEmoji: false,
+      emoji: ""
     };
   }
-
-  handleNextDialog = () => {
-    if (this.isStoryEnd()) {
-      let previousDialogs = this.state.currentDialogs;
-
-      // remove previous typing dialog indicator
-      if (this.isPreviousDialogTypingDialog()) {
-        previousDialogs = previousDialogs.slice(0, previousDialogs.length - 1);
-      }
-
-      const nextDialogs = this.getNextDialogs(previousDialogs);
-
-      // hide previous dialog actor avatar if previous dialog actor is same as next dialog actor
-      if (
-        this.shouldHidePreviousDialogAvatar(nextDialogs, nextDialogs.length - 1)
-      ) {
-        nextDialogs[nextDialogs.length - 2].payload.hideActorAvatar = true;
-      }
-
-      this.setState({
-        currentDialogs: nextDialogs,
-        nextDialogIndex: this.state.nextDialogIndex + 1
-      });
-    }
-
-    if (this.state.showFooter) {
-      this.setState({
-        showFooter: !this.state.showFooter
-      });
-    }
-  };
 
   isStoryEnd = () => {
     return this.state.nextDialogIndex !== EpisodeData.dialogs.length
@@ -101,6 +72,9 @@ class EpisodePage extends Component {
       : false;
   };
 
+  hasNextDialogAnimatedEmoji = nextDialog =>
+    nextDialog.payload && nextDialog.payload.animatedEmoji;
+
   shouldHidePreviousDialogAvatar = (dialogs, lastIndex) => {
     if (lastIndex !== 0) {
       return dialogs[lastIndex - 1].actorID === dialogs[lastIndex].actorID
@@ -110,9 +84,9 @@ class EpisodePage extends Component {
     return false;
   };
 
-  getNextDialogs = currentDialogs => [
+  getNextDialogs = (currentDialogs, nextDialog) => [
     ...currentDialogs,
-    EpisodeData.dialogs[this.state.nextDialogIndex]
+    nextDialog
   ];
 
   getReadingPercentage = () => {
@@ -121,10 +95,10 @@ class EpisodePage extends Component {
 
   handleOnThemeChange = e => this.setState({ themeDarkMode: e.target.checked });
 
+  handleCloseSettings = () => this.setState({ showSettings: false });
+
   handleOnReadingModeChange = e =>
     this.setState({ readingAutoMode: e.target.checked });
-
-  handleCloseSettings = () => this.setState({ showSettings: false });
 
   handleAutoModeOnChange = e => {
     this.setState({ readingAutoModeSpeed: e.target.value });
@@ -132,6 +106,47 @@ class EpisodePage extends Component {
 
   handleFontSizeOnChange = e => {
     this.setState({ fontSize: e.target.value });
+  };
+
+  handleNextDialogAnimatedEmoji = (nextState, nextDialog) => {
+    this.setState({ showAnimatedEmoji: false });
+    nextState.emoji = nextDialog.payload.animatedEmoji;
+    nextState.showAnimatedEmoji = true;
+  };
+
+  handleNextDialog = () => {
+    let nextState = {};
+
+    if (this.isStoryEnd()) {
+      let previousDialogs = this.state.currentDialogs;
+      const nextDialog = EpisodeData.dialogs[this.state.nextDialogIndex];
+
+      // remove previous typing dialog indicator
+      if (this.isPreviousDialogTypingDialog()) {
+        previousDialogs = previousDialogs.slice(0, previousDialogs.length - 1);
+      }
+
+      const nextDialogs = [...previousDialogs, nextDialog];
+
+      // hide previous dialog actor avatar if previous dialog actor is same as next dialog actor
+      if (
+        this.shouldHidePreviousDialogAvatar(nextDialogs, nextDialogs.length - 1)
+      ) {
+        nextDialogs[nextDialogs.length - 2].payload.hideActorAvatar = true;
+      }
+
+      this.hasNextDialogAnimatedEmoji(nextDialog) &&
+        this.handleNextDialogAnimatedEmoji(nextState, nextDialog);
+
+      nextState.currentDialogs = nextDialogs;
+      nextState.nextDialogIndex = this.state.nextDialogIndex + 1;
+    }
+
+    if (this.state.showFooter) {
+      nextState.showFooter = !this.state.showFooter;
+    }
+
+    this.setState(nextState);
   };
 
   render() {
@@ -175,6 +190,8 @@ class EpisodePage extends Component {
                     onNextDialog={this.handleNextDialog}
                     dialogs={this.state.currentDialogs}
                     style={EpisodeData.style}
+                    showAnimatedEmoji={this.state.showAnimatedEmoji}
+                    emoji={this.state.emoji}
                   />
                 </Box>
                 {size !== "small" && (
