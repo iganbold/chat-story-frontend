@@ -2,9 +2,9 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { style as AnimatedDialogStyle } from "../AnimationDialog";
 
-const youtubeStyle = css`
+const youtubeStyle = ({ theme }) => css`
   margin: 0px 2.5px;
-  background: #ededed;
+  background: ${theme.bubble.background};
   ${AnimatedDialogStyle}
 `;
 

@@ -29,6 +29,14 @@ export const EpisodeData = {
       trigger: 2
     },
     {
+      id: 5,
+      type: "TEXT_DIALOG",
+      actorID: "0002",
+      payload: {
+        value: "hi, check out this video"
+      }
+    },
+    {
       id: 2,
       type: "VIDEO_DIALOG",
       actorID: "0002",
