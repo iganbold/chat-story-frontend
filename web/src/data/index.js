@@ -29,6 +29,15 @@ export const EpisodeData = {
       trigger: 2
     },
     {
+      id: 2,
+      type: "VIDEO_DIALOG",
+      actorID: "0002",
+      payload: {
+        url: "https://app.coverr.co/s3/mp4/Cam-Man.mp4"
+      },
+      trigger: 2
+    },
+    {
       id: 1,
       type: "TEXT_DIALOG",
       actorID: "0001",
@@ -39,6 +48,15 @@ export const EpisodeData = {
           { value: 2, label: "Number 2", trigger: "15" },
           { value: 3, label: "Number 3", trigger: "20" }
         ]
+      },
+      trigger: 2
+    },
+    {
+      id: 2,
+      type: "VIDEO_DIALOG",
+      actorID: "0001",
+      payload: {
+        url: "https://www.youtube.com/embed/Fhn1ZMRnsXA"
       },
       trigger: 2
     },
